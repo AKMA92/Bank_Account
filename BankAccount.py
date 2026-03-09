@@ -1,16 +1,18 @@
 class BankAccount:
+    limit = 100000
+    balance = 0.0
+    active = True
 
-    def __init__(self, iban: str, currency="CHF"):
+    def __init__(self, iban: str, currency="CHF", withdraw_limit: float = 10000):
         self.iban = iban
         self.currency = currency
-        self.balance = 0.0
-        self.active = True
-        self.limit = 100000
+        self.withdraw_limit = withdraw_limit
 
+#variable activ true setzen
     def open_account(self):
         self.active = True
         print("Account set to active")
-
+#erhaltet als parameter Betrag
     def deposit(self, amount: float):
         if not self.active:
             print("Account is inactive")
@@ -18,10 +20,11 @@ class BankAccount:
         if amount <= 0:
             print("Amount must be positive")
             return False
+
         if amount + self.balance > self.limit:
             print("Limit exceeded")
             return False
-
+        # aktueller Kontostand + Einzahlung
         self.balance += amount
         print(f"New balance: {self.balance} {self.currency}")
         return True
@@ -36,15 +39,16 @@ class BankAccount:
         if amount > self.balance:
             print("Insufficient balance")
             return False
-
+        #Geld wird von konto abgezogen
         self.balance -= amount
+        #neuer Kontostand
         print(f"New balance: {self.balance} {self.currency}")
         return True
 
     def get_balance(self):
         if not self.active:
             print("Access denied")
-            return None
+            return False
         print(f"Balance: {self.balance} {self.currency}")
         return self.balance
 
