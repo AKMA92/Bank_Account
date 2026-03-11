@@ -7,9 +7,17 @@ class SavingsAccount(BankAccount):
     def apply_interest(self):
         interest_rate = 0.001
         self.balance = self.balance + self.balance * interest_rate
-        pass
 
-    def withdraw_negative(self, amount):
+    def withdraw(self, amount):
+        if not self.active:
+            return "Account is inactive"
+        if amount <= 0:
+            return "Amount must be positive"
         if self.balance < 0:
             fee = amount * 0.02
-        pass
+            amount += fee
+            self.balance -= amount
+            return f"Withdraw {amount} {self.currency}  succeeded"
+        else:
+            self.balance -= amount
+            return f"Withdraw {amount} {self.currency}  succeeded"

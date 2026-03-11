@@ -8,53 +8,38 @@ class BankAccount:
         self.currency = currency
         self.withdraw_limit = withdraw_limit
 
-#variable activ true setzen
     def open_account(self):
         self.active = True
-        print("Account set to active")
-#erhaltet als parameter Betrag
+        return "Account set to active"
+
     def deposit(self, amount: float):
         if not self.active:
-            print("Account is inactive")
-            return False
+            return "Account is inactive"
         if amount <= 0:
-            print("Amount must be positive")
-            return False
-
+            return "Amount must be positive"
         if amount + self.balance > self.limit:
-            print("Limit exceeded")
-            return False
-        # aktueller Kontostand + Einzahlung
+            return "Limit exceeded"
         self.balance += amount
-        print(f"New balance: {self.balance} {self.currency}")
-        return True
+        return f"Deposit {amount} {self.currency} succeeded"
 
     def withdraw(self, amount: float):
         if not self.active:
-            print("Account is inactive")
-            return False
+            return "Account is inactive"
         if amount <= 0:
-            print("Amount must be positive")
-            return False
+            return "Amount must be positive"
         if amount > self.balance:
-            print("Insufficient balance")
-            return False
-        #Geld wird von konto abgezogen
+            return "Insufficient balance"
         self.balance -= amount
-        #neuer Kontostand
-        print(f"New balance: {self.balance} {self.currency}")
-        return True
+        return f"Withdraw {amount} {self.currency} succeeded"
 
     def get_balance(self):
         if not self.active:
-            print("Access denied")
-            return False
-        print(f"Balance: {self.balance} {self.currency}")
-        return self.balance
+            return "Access denied"
+        return f"{self.balance} {self.currency}"
 
     def close_account(self):
         self.active = False
-        print("Account set to inactive")
+        return "Account set to inactive"
 
 
 if __name__ == "__main__":
@@ -63,7 +48,7 @@ if __name__ == "__main__":
     my_bankaccount = BankAccount("CH55555555555555555")
 
     # Methoden testen
-    my_bankaccount.deposit(1000)
+    print(my_bankaccount.deposit(1000))
     my_bankaccount.withdraw(200)
     my_bankaccount.get_balance()
     my_bankaccount.close_account()
