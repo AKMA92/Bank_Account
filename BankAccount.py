@@ -1,12 +1,12 @@
 class BankAccount:
     limit = 100000
-    balance = 0.0
-    active = True
 
     def __init__(self, iban: str, currency="CHF", withdraw_limit: float = 10000):
         self.iban = iban
         self.currency = currency
         self.withdraw_limit = withdraw_limit
+        self.balance = 0.0
+        self.active = True
 
     def open_account(self):
         self.active = True

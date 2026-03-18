@@ -1,12 +1,13 @@
 from BankAccount import BankAccount
 
 class SavingsAccount(BankAccount):
+    interest_rate = 0.001
+
     def __init__(self, iban: str, currency="CHF"):
         super().__init__(iban, currency)
 
     def apply_interest(self):
-        interest_rate = 0.001
-        self.balance = self.balance + self.balance * interest_rate
+        self.balance = self.balance + self.balance * self.interest_rate
 
     def withdraw(self, amount):
         if not self.active:

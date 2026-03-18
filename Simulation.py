@@ -2,7 +2,7 @@ from time import sleep
 from SavingAccount import SavingsAccount
 from YouthAccount import YouthAccount
 
-sleeptime: int = 2
+sleeptime: int = 10
 
 # Saving Account testen
 print("=== Saving Account Simulation ===")
@@ -16,7 +16,9 @@ sleep(sleeptime)
 saving.apply_interest()
 print("Balance after 1 month:", saving.get_balance())
 print("Waiting 20 seconds (2 more months)...")
+
 sleep(sleeptime+sleeptime)
+
 saving.apply_interest()
 saving.apply_interest()
 print("Balance after 3 months:", saving.get_balance())
@@ -27,13 +29,14 @@ print("\n=== Youth Account Simulation ===")
 youth = YouthAccount("CH222222222222222222", age=20)
 print(youth.deposit(3000))
 print("Balance:", youth.get_balance())
-print(youth.withdraw(1500))
-print(youth.withdraw(600))  # sollte Limit überschreiten
+print(youth.withdraw(100))
+print(youth.withdraw(200))  # sollte Limit überschreiten
 print("Waiting 10 seconds (new month)...")
 
 sleep(sleeptime)
 
 # Monatslimit manuell resetten für neue Periode
-youth.withdrawn_this_month = 0
-print(youth.withdraw(600))
+youth.reset_withdrawn_this_month()
+print(youth.withdraw(2500))
 print("Balance:", youth.get_balance())
+print(youth.withdrawn_this_month)

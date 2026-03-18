@@ -15,7 +15,10 @@ class YouthAccount(BankAccount):
         interest_rate = 0.02
         self.balance = self.balance + self.balance * interest_rate
 
+    # Methode prüft ob das monatliche Limit überschritten wird
     def check_monthly_withdraw_limit(self, amount):
+
+        # Wenn aktuelle Abhebung + bisherige Abhebungen > Limit
         if self.withdrawn_this_month + amount > self.monthly_withdraw_limit:
             print("The monthly withdrawal limit is $2,000.")
             return False
@@ -32,3 +35,7 @@ class YouthAccount(BankAccount):
         self.balance -= amount
         self.withdrawn_this_month += amount
         return f"Withdraw {amount} {self.currency} succeeded"
+
+
+    def reset_withdrawn_this_month(self):
+        self.withdrawn_this_month = 0
