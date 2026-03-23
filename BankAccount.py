@@ -35,11 +35,16 @@ class BankAccount:
     def get_balance(self):
         if not self.active:
             return "Access denied"
-        return f"{self.balance} {self.currency}"
+        return self.balance
 
     def close_account(self):
         self.active = False
         return "Account set to inactive"
+
+    def get_currency(self):
+        if not self.active:
+            return "Access denied"
+        return self.currency
 
 
 if __name__ == "__main__":
